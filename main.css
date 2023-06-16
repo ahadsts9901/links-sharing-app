@@ -19,13 +19,16 @@ body,
 }
 
 .section {
-    width: 100%;
+    width: 90%;
     height: 100%;
     background-color: #fff;
     border-radius: 25px;
     overflow-x: hidden;
     overflow-y: auto;
+    justify-content: right;
     align-items: flex-start;
+    padding: 1em 2em;
+    row-gap: 0.2em;
 }
 
 body {
@@ -138,6 +141,22 @@ column {
 .center {
     width: 100%;
     text-align: center;
+}
+
+.rowScroll{
+    display: flex;
+    justify-content: left;
+    align-items: center;
+    padding: 0.5em;
+    column-gap: 1em;
+    width: 100%;
+}
+
+.scrollX{
+    width: 95%;
+    overflow-y: hidden;
+    overflow-x: auto;
+    justify-self: left;
 }
 
 @media only screen and (max-width: 1070px) {
