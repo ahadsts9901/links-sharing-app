@@ -22,22 +22,58 @@ body,
     width: 90%;
     height: 100%;
     background-color: #fff;
-    border-radius: 25px;
+    border-radius: 10px;
     overflow-x: hidden;
     overflow-y: auto;
     justify-content: right;
     align-items: flex-start;
-    padding: 1em 2em;
+    padding: 1em 1em;
     row-gap: 0.2em;
 }
 
+.section::-moz-scrollbar {
+    width: 0.7em;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #fff;
+}
+
+.section::-moz-scrollbar-thumb {
+    background-color: #212121;
+}
+
+.section::-moz-scrollbar-track {
+    background-color: #fff;
+}
+
+.section::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px #212121; */
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #fff;
+}
+
+.section::-webkit-scrollbar {
+    width: 0.7em;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    background-color: #fff;
+}
+
+.section::-webkit-scrollbar-thumb {
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
+    /* -webkit-box-shadow: inset 0 0 6px #212121; */
+    background-color: #212121;
+}
+
 body {
-    background-color: #000;
+    background-color: #212121;
     padding: 2em 1em 1em 1em;
 }
 
 a {
-    color: #000;
+    color: #212121;
 }
 
 p,
@@ -61,12 +97,13 @@ row,
 form.row {
     column-gap: 0px;
     border-radius: 100px;
-    background-color: #fff;
+    /* background-color: #fff; */
     justify-content: space-between;
     margin: 0em;
     width: 80%;
     /* background-color: #000; */
-    padding: 0.5em;
+    padding: 0em;
+    background-color: #212121;
 }
 
 column {
@@ -79,22 +116,22 @@ column {
 }
 
 .input {
-    color: #000;
+    color: #212121;
     background-color: #fff;
     width: 92%;
-    height: 2.5em;
+    height: 3em;
     border-radius: 20px;
     font-size: 1em;
     padding: 0.5em 1em;
-    border: 2px solid #000;
+    border: 2px solid #212121;
 }
 
 .button {
-    color: #000;
+    color: #212121;
     background-color: #fff;
     width: 4em;
-    height: 2.5em;
-    border: 0px solid #000;
+    height: 3em;
+    border: 0px solid #212121;
     border-radius: 0px;
     font-size: 1em;
     border-radius: 100px;
@@ -105,12 +142,12 @@ column {
 }
 
 .button:active {
-    background-color: #000;
+    background-color: #212121;
     color: #fff;
 }
 
 .drop-down {
-    background-color: #000;
+    background-color: #212121;
     color: #fff;
     border: 0px;
     padding: 0em;
@@ -119,7 +156,7 @@ column {
 
 .drop-down-options {
     background-color: #fff;
-    color: #000;
+    color: #212121;
     border: 0px;
 }
 
@@ -143,7 +180,7 @@ column {
     text-align: center;
 }
 
-.rowScroll{
+.rowScroll {
     display: flex;
     justify-content: left;
     align-items: center;
@@ -152,11 +189,47 @@ column {
     width: 100%;
 }
 
-.scrollX{
+.scrollX {
     width: 95%;
     overflow-y: hidden;
     overflow-x: auto;
     justify-self: left;
+}
+
+.scrollX::-moz-scrollbar {
+    height: 0.4em;
+    border-radius: 10px;
+    background-color: #212121;
+}
+
+.scrollX::-moz-scrollbar-thumb {
+    background-color: #fff;
+    border: 1px solid #212121;
+}
+
+.scrollX::-moz-scrollbar-track {
+    background-color: #212121;
+    border: 1px solid #fff;
+}
+
+.scrollX::-webkit-scrollbar-track {
+    /* -webkit-box-shadow: inset 0 0 6px #212121; */
+    border-radius: 10px;
+    background-color: #212121;
+    border: 1px solid #fff;
+}
+
+.scrollX::-webkit-scrollbar {
+    height: 0.4em;
+    border-radius: 10px;
+    background-color: #212121;
+}
+
+.scrollX::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    /* -webkit-box-shadow: inset 0 0 6px #212121; */
+    background-color: #fff;
+    border: 1px solid #212121;
 }
 
 @media only screen and (max-width: 1070px) {
@@ -177,7 +250,6 @@ column {
     }
 }
 
-
 @media only screen and (max-width: 608px) {
     .input {
         width: 80%;
@@ -197,20 +269,18 @@ column {
 }
 
 @media only screen and (max-width: 357px) {
-    form.row{
+    form.row {
         width: 20em;
     }
-
     .input {
         width: 70%;
     }
 }
 
 @media only screen and (max-width: 357px) {
-    form.row{
+    form.row {
         width: 20em;
     }
-
     .input {
         width: 60%;
     }
