@@ -20,7 +20,7 @@ body,
 
 .section {
     width: 90%;
-    height: 100%;
+    height: 90%;
     background-color: #fff;
     border-radius: 10px;
     overflow-x: hidden;
@@ -178,6 +178,7 @@ column {
 .center {
     width: 100%;
     text-align: center;
+    color: #fff;
 }
 
 .rowScroll {
