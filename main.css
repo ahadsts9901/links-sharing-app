@@ -183,7 +183,7 @@ column {
 
 .rowScroll {
     display: flex;
-    justify-content: left;
+    justify-content: space-between;
     align-items: center;
     padding: 0.5em;
     column-gap: 1em;
@@ -191,7 +191,7 @@ column {
 }
 
 .scrollX {
-    width: 95%;
+    width: 90%;
     overflow-y: hidden;
     overflow-x: auto;
     justify-self: left;
@@ -231,6 +231,17 @@ column {
     /* -webkit-box-shadow: inset 0 0 6px #212121; */
     background-color: #fff;
     border: 1px solid #212121;
+}
+
+.small {
+    font-size: 0.6em;
+}
+
+.small-container {
+    width: 8em;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 }
 
 @media only screen and (max-width: 1070px) {
@@ -273,6 +284,7 @@ column {
     form.row {
         width: 20em;
     }
+
     .input {
         width: 70%;
     }
@@ -282,6 +294,7 @@ column {
     form.row {
         width: 20em;
     }
+
     .input {
         width: 60%;
     }
