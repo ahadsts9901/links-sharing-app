@@ -54,15 +54,14 @@ function addLink(event) {
     document.querySelector('.input').value = "";
 }
 
-// renderLink function
+// renderLink 
 
 function renderLink() {
     section.innerHTML = ""; // Clear the section container before rendering links
     db.collection("users")
         .orderBy("timestamp", "desc")
-        .get()
-        .then(function(querySnapshot) {
-            if (querySnapshot.size === 0) {
+        .onSnapshot(function(querySnapshot) {
+            if (querySnapshot.empty) {
                 section.innerHTML = "<div class='blue'>No Links found</div>";
             } else {
                 querySnapshot.forEach(function(doc) {
@@ -106,12 +105,10 @@ function renderLink() {
                     cont.appendChild(del);
                 });
             }
-        })
-        .catch(function(error) {
+        }, function(error) {
             console.log("Error getting documents: ", error);
         });
 }
-
 
 async function deleteLink(docId) {
     const { value: password } = await Swal.fire({
