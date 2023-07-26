@@ -26,7 +26,7 @@ function addLink(event) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp() // Add a timestamp field with server timestamp
         })
         .then((docRef) => {
-
+            localStorage.setItem('linkAdded', 'true');
             // sweet alert
 
             const Toast = Swal.mixin({
@@ -56,9 +56,25 @@ function addLink(event) {
 
 // renderLink 
 
+let linkSnapshotListener; // Store the reference to the listener
+
 function renderLink() {
     section.innerHTML = ""; // Clear the section container before rendering links
-    db.collection("users")
+
+    // Check if a link was recently added on this device
+    const linkAdded = localStorage.getItem('linkAdded');
+    if (linkAdded) {
+        // If a link was recently added, remove the flag from local storage and return
+        localStorage.removeItem('linkAdded');
+        return;
+    }
+
+    // Detach the previous listener before adding a new one
+    if (linkSnapshotListener) {
+        linkSnapshotListener();
+    }
+
+    linkSnapshotListener = db.collection("users")
         .orderBy("timestamp", "desc")
         .onSnapshot(function(querySnapshot) {
             if (querySnapshot.empty) {
@@ -103,6 +119,7 @@ function renderLink() {
                     del.className += " small";
                     del.addEventListener("click", () => deleteLink(doc.id));
                     cont.appendChild(del);
+
                 });
             }
         }, function(error) {
