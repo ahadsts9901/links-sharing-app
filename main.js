@@ -26,7 +26,7 @@ function addLink(event) {
             timestamp: firebase.firestore.FieldValue.serverTimestamp() // Add a timestamp field with server timestamp
         })
         .then((docRef) => {
-            localStorage.setItem('linkAdded', 'true');
+
             // sweet alert
 
             const Toast = Swal.mixin({
@@ -54,22 +54,17 @@ function addLink(event) {
     document.querySelector('.input').value = "";
 }
 
-// renderLink 
-
-let linkSnapshotListener; // Store the reference to the listener
+let linkSnapshotListener;
+let isRenderingLinks = false;
 
 function renderLink() {
-    section.innerHTML = ""; // Clear the section container before rendering links
-
-    // Check if a link was recently added on this device
-    const linkAdded = localStorage.getItem('linkAdded');
-    if (linkAdded) {
-        // If a link was recently added, remove the flag from local storage and return
-        localStorage.removeItem('linkAdded');
+    if (isRenderingLinks) {
         return;
     }
 
-    // Detach the previous listener before adding a new one
+    isRenderingLinks = true;
+
+
     if (linkSnapshotListener) {
         linkSnapshotListener();
     }
@@ -77,6 +72,7 @@ function renderLink() {
     linkSnapshotListener = db.collection("users")
         .orderBy("timestamp", "desc")
         .onSnapshot(function(querySnapshot) {
+            section.innerHTML = "";
             if (querySnapshot.empty) {
                 section.innerHTML = "<div class='blue'>No Links found</div>";
             } else {
@@ -119,13 +115,16 @@ function renderLink() {
                     del.className += " small";
                     del.addEventListener("click", () => deleteLink(doc.id));
                     cont.appendChild(del);
-
                 });
             }
+
+            isRenderingLinks = false;
         }, function(error) {
             console.log("Error getting documents: ", error);
+            isRenderingLinks = false;
         });
 }
+
 
 async function deleteLink(docId) {
     const { value: password } = await Swal.fire({
