@@ -184,7 +184,7 @@ column {
 .rowScroll {
     display: flex;
     justify-content: space-between;
-    align-items: center;
+    align-items: start;
     padding: 0.5em;
     column-gap: 1em;
     width: 100%;
@@ -284,7 +284,6 @@ column {
     form.row {
         width: 20em;
     }
-
     .input {
         width: 70%;
     }
@@ -294,7 +293,6 @@ column {
     form.row {
         width: 20em;
     }
-
     .input {
         width: 60%;
     }
