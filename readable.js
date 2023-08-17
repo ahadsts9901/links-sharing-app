@@ -19,9 +19,10 @@ let section = document.querySelector(".section");
 
 function addLink(event) {
     event.preventDefault();
-    let input = document.querySelector('.input').value;
-
-    db.collection("users").add({
+    let input = document.querySelector('.userInput').value;
+    let classId = document.querySelector("#classId").value
+    localStorage.setItem("classId", classId); // Save classId to local storage
+    db.collection(`${classId}`).add({
             link: input,
             timestamp: firebase.firestore.FieldValue.serverTimestamp() // Add a timestamp field with server timestamp
         })
@@ -51,13 +52,14 @@ function addLink(event) {
             console.error("Error adding document: ", error);
         });
 
-    document.querySelector('.input').value = "";
+    document.querySelector('.userInput').value = "";
 }
 
 let linkSnapshotListener;
 let isRenderingLinks = false;
 
 function renderLink() {
+
     if (isRenderingLinks) {
         return;
     }
@@ -69,7 +71,9 @@ function renderLink() {
         linkSnapshotListener();
     }
 
-    linkSnapshotListener = db.collection("users")
+    let classId = document.querySelector("#classId").value || localStorage.getItem("classId")
+    document.querySelector("#classId").value = classId
+    linkSnapshotListener = db.collection(`${classId}`)
         .orderBy("timestamp", "desc")
         .onSnapshot(function(querySnapshot) {
             section.innerHTML = "";
@@ -174,7 +178,8 @@ async function deleteLink(docId) {
                     title: 'Deleted successfully'
                 })
 
-                db.collection("users").doc(docId).delete()
+                let classId = document.querySelector("#classId").value
+                db.collection(`${classId}`).doc(docId).delete()
                     .then(() => {
                         renderLink(); // Re-render links after successful deletion
                     })
@@ -197,12 +202,6 @@ async function deleteLink(docId) {
         });
     }
 }
-
-// on load function
-
-document.addEventListener("DOMContentLoaded", function() {
-    renderLink();
-});
 
 // delete all
 
@@ -231,7 +230,9 @@ async function deleteAllLinks() {
         });
 
         if (isConfirmed) {
-            db.collection("users")
+
+            let classId = document.querySelector("#classId").value
+            db.collection(`${classId}`)
                 .get()
                 .then((querySnapshot) => {
                     const batch = db.batch();
@@ -275,8 +276,23 @@ async function deleteAllLinks() {
     }
 }
 
-document.querySelector("#deleteAllButton").addEventListener("click", deleteAllLinks);
+// on load function
+
+document.addEventListener("DOMContentLoaded", function() {
+    renderLink();
+});
+
+// classid input enter function
+document.querySelector("#classId").addEventListener('input', function(event) {
+    const classId = event.target.value; // Get the input value
+    localStorage.setItem("classId", classId); // Save classId to local storage
+    setTimeout(() => {
+        renderLink(); // Render links immediately after the class ID input changes
+    }, 1000);
+});
+
 
 // on form submit
-
 document.querySelector('#form').addEventListener('submit', addLink);
+
+document.querySelector("#deleteAllButton").addEventListener("click", deleteAllLinks);

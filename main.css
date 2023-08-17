@@ -245,6 +245,10 @@ column {
     align-items: center;
 }
 
+.classId {
+    width: 10em!important;
+}
+
 @media only screen and (max-width: 1070px) {
     .input {
         width: 90%;
@@ -283,7 +287,9 @@ column {
 
 @media only screen and (max-width: 357px) {
     form.row {
-        width: 20em;
+        width: 100%;
+        justify-content: center;
+        gap: 1em;
     }
     .input {
         width: 70%;
@@ -291,9 +297,6 @@ column {
 }
 
 @media only screen and (max-width: 357px) {
-    form.row {
-        width: 20em;
-    }
     .input {
         width: 60%;
     }
