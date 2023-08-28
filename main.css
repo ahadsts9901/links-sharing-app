@@ -1,7 +1,7 @@
 * {
     font-family: "Poppins", "sans-serif";
     font-weight: bold;
-    outline: none!important;
+    outline: none !important;
 }
 
 body,
@@ -246,11 +246,15 @@ column {
 }
 
 .classId {
-    width: 10em!important;
+    width: 10em !important;
+}
+
+.section a {
+    color: #004ec2;
 }
 
 .section a:visited {
-    color: #680000;
+    color: #6800c2;
 }
 
 .section a:hover,
@@ -300,6 +304,7 @@ column {
         justify-content: center;
         gap: 1em;
     }
+
     .input {
         width: 70%;
     }
